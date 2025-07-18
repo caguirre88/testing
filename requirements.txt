@@ -1,0 +1,4 @@
+pandas
+sodapy
+selenium
+beautifulsoup4
