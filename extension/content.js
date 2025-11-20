@@ -63,12 +63,15 @@
       if (!isVisible(btn) || btn.disabled) return false;
 
       const t = normalize(btn.textContent).toLowerCase();
-      if (!t.includes('connect')) return false;
+
+      const isConnectIntent = t.includes('connect') || t.includes('invite');
+      if (!isConnectIntent) return false;
 
       if (
         t.includes('pending') ||
         t.includes('requested') ||
         t.includes('invite sent') ||
+        t.includes('invitation sent') ||
         t.includes('following') ||
         t.includes('follow')
       ) {
@@ -182,6 +185,10 @@
       return { status: 'already_running', message: 'Auto-connect is already running on this page.' };
     }
 
+    if (!/linkedin\.com$/i.test(location.hostname)) {
+      return { status: 'error', message: 'This only runs on linkedin.com pages.' };
+    }
+
     window.__LI_AUTO_CONNECT_RUNNING__ = true;
     window.__LI_AUTO_CONNECT_STOP__ = false;
 
@@ -200,6 +207,7 @@
         let buttons = getConnectButtons().filter((b) => !seen.has(b));
 
         if (!buttons.length) {
+          log('No new connect buttons visible yet, scrolling to look for more…');
           if (!CONFIG.autoScroll) break;
 
           const moved = await autoScrollOnce();
@@ -217,6 +225,8 @@
           }
           continue;
         }
+
+        log(`Found ${buttons.length} connectable button(s) on screen.`);
 
         const btn = buttons[0];
         seen.add(btn);

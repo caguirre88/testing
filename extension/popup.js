@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      if (!/^https?:\/\/([a-zA-Z0-9-]+\.)*linkedin\.com\//.test(tab.url || '')) {
+        setLoading(false);
+        setStatus('Please open a linkedin.com page with Connect buttons and try again.');
+        return;
+      }
+
       chrome.tabs.sendMessage(tab.id, { type: 'RUN_AUTO_CONNECT' }, (response) => {
         if (chrome.runtime.lastError) {
           setLoading(false);
