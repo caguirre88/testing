@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn Auto-Connect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 12px;
+      min-width: 260px;
+      color: #1b1b1b;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #0a66c2;
+    }
+    p {
+      margin: 4px 0 10px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    button {
+      background-color: #0a66c2;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      width: 100%;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    #status {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #4b4b4b;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>LinkedIn Auto-Connect</h1>
+  <p>Open a LinkedIn search results page and click the button to send connection requests automatically.</p>
+  <button id="start">Run Auto-Connect</button>
+  <div id="status"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
